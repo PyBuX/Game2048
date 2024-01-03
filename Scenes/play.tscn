@@ -1,0 +1,107 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjvxn3mtubq08"]
+
+[ext_resource type="Script" path="res://Scripts/Game.cs" id="1_3gy5a"]
+[ext_resource type="Script" path="res://Scenes/Interface.cs" id="2_7qoes"]
+[ext_resource type="Texture2D" uid="uid://b0crnlxectqqq" path="res://Sprites/reset.png" id="3_p0r6g"]
+[ext_resource type="Texture2D" uid="uid://d1nx5nw82qpym" path="res://Sprites/menu.png" id="4_0hxx2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_frn2n"]
+size = Vector2(500, 500)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3l0yw"]
+size = Vector2(900, 900)
+
+[node name="Play" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 576.0
+offset_bottom = 1024.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.866667, 0.745098, 0.380392, 1)
+
+[node name="Game" type="Node2D" parent="."]
+script = ExtResource("1_3gy5a")
+
+[node name="Interface" type="Node2D" parent="Game"]
+script = ExtResource("2_7qoes")
+
+[node name="Buttons" type="VBoxContainer" parent="Game/Interface"]
+offset_top = 30.0
+offset_right = 576.0
+offset_bottom = 280.0
+
+[node name="Refresh" type="Sprite2D" parent="Game/Interface/Buttons"]
+position = Vector2(350, 160)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_p0r6g")
+
+[node name="Area2D" type="Area2D" parent="Game/Interface/Buttons/Refresh"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Interface/Buttons/Refresh/Area2D"]
+shape = SubResource("RectangleShape2D_frn2n")
+
+[node name="Menu" type="Sprite2D" parent="Game/Interface/Buttons"]
+position = Vector2(500, 160)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_0hxx2")
+
+[node name="Area2D" type="Area2D" parent="Game/Interface/Buttons/Menu"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Interface/Buttons/Menu/Area2D"]
+shape = SubResource("RectangleShape2D_3l0yw")
+
+[node name="GameOver" type="Node2D" parent="Game"]
+z_index = 1
+
+[node name="ColorRect" type="ColorRect" parent="Game/GameOver"]
+offset_top = -576.0
+offset_right = 576.0
+color = Color(1, 1, 1, 0.211765)
+
+[node name="Label" type="Label" parent="Game/GameOver/ColorRect"]
+layout_mode = 2
+offset_top = 230.0
+offset_right = 576.0
+offset_bottom = 299.0
+theme_override_font_sizes/font_size = 50
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WinGame" type="Node2D" parent="Game"]
+z_index = 1
+
+[node name="ColorRect" type="ColorRect" parent="Game/WinGame"]
+offset_top = -576.0
+offset_right = 576.0
+color = Color(1, 1, 1, 0.211765)
+
+[node name="Label" type="Label" parent="Game/WinGame/ColorRect"]
+layout_mode = 2
+offset_top = 230.0
+offset_right = 576.0
+offset_bottom = 299.0
+theme_override_font_sizes/font_size = 50
+text = "You Win!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="Game"]
+offset_top = 30.0
+offset_right = 576.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 50
+text = "Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="input_event" from="Game/Interface/Buttons/Refresh/Area2D" to="Game" method="_on_area_2d_input_event_reset"]
+[connection signal="input_event" from="Game/Interface/Buttons/Menu/Area2D" to="Game/Interface" method="_on_area_2d_input_event_menu"]

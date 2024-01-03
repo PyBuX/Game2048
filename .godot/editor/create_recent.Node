@@ -1,0 +1,9 @@
+Node2D
+ColorRect
+Label
+VBoxContainer
+CollisionShape2D
+Area2D
+Sprite2D
+Button
+BoxContainer

@@ -1,0 +1,8 @@
+res://Scenes/play.tscn
+res://Scripts/Game.cs
+res://Scenes/tile.tscn
+res://Scenes/game.tscn
+res://Scenes/Interface.cs
+res://Scripts/Level.cs
+res://Scripts/MenuButtons.cs
+res://Scripts/Start.cs
